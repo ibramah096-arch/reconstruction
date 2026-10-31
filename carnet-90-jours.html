@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ma reconstruction — 90 jours</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600&display=swap">
+<style>
+:root{--bg:#f2f4f1;--card:#fff;--ink:#1d2a2e;--mute:#66767a;--line:#dde3df;--acc:#1f6f6b;--accs:#d6ebe8;--warm:#b97a1e;--c0:#e4e9e6;--c1:#bfdcd8;--c2:#78b5ae;--c3:#1f6f6b;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a1c;--card:#1b2629;--ink:#e6eeec;--mute:#93a4a6;--line:#2c3a3d;--acc:#5cc2ba;--accs:#1f3a3a;--warm:#e0a448;--c0:#263235;--c1:#2c4b4a;--c2:#3c8580;--c3:#5cc2ba;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121a1c;--card:#1b2629;--ink:#e6eeec;--mute:#93a4a6;--line:#2c3a3d;--acc:#5cc2ba;--accs:#1f3a3a;--warm:#e0a448;--c0:#263235;--c1:#2c4b4a;--c2:#3c8580;--c3:#5cc2ba;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#app{max-width:640px;margin:0 auto;padding:14px 14px 96px}
+h1,h2,h3{font-family:Newsreader,Georgia,serif;font-weight:600;margin:0;line-height:1.2}
+h1{font-size:26px}h2{font-size:21px;margin-bottom:8px}h3{font-size:17px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+.mute{color:var(--mute);font-size:14px}
+.row{display:flex;align-items:center;gap:10px}.sp{justify-content:space-between}
+button{font:inherit;color:inherit;cursor:pointer}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:10px;padding:10px 14px;font-weight:600}
+:root[data-theme="dark"] .btn{color:#0b1516}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#0b1516}}
+.ghost{background:none;border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.arrow{background:none;border:1px solid var(--line);border-radius:10px;width:44px;height:44px;font-size:20px}
+.chk{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:11px 0;min-height:48px}
+.chk:last-child{border-bottom:0}
+.box{flex:none;width:24px;height:24px;border:2px solid var(--mute);border-radius:7px;display:grid;place-items:center;font-size:15px;color:transparent;margin-top:1px}
+.on .box{background:var(--acc);border-color:var(--acc);color:#fff}
+.on .t{color:var(--mute);text-decoration:line-through}
+.tag{font-size:13px;color:var(--mute)}
+textarea,input[type=text],input[type=number],input[type=date],input[type=email],input[type=password]{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:6px}
+textarea{min-height:70px;resize:vertical}
+label{display:block;margin-top:12px;font-weight:600;font-size:15px}
+.scale{display:flex;gap:6px;margin-top:6px}
+.scale button{flex:1;height:44px;border:1px solid var(--line);border-radius:10px;background:none}
+.scale button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+:root[data-theme="dark"] .scale button.on{color:#0b1516}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .scale button.on{color:#0b1516}}
+.bar{height:10px;background:var(--c0);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(15,1fr);gap:4px;margin-top:10px}
+.grid button{aspect-ratio:1;border:0;border-radius:4px;padding:0;background:var(--c0)}
+.grid .l1{background:var(--c1)}.grid .l2{background:var(--c2)}.grid .l3{background:var(--c3)}
+.grid .now{outline:2px solid var(--warm);outline-offset:1px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{text-align:center}.stat b{display:block;font:600 26px Newsreader,Georgia,serif}
+.moods{display:flex;gap:4px;align-items:flex-end;height:64px;margin-top:8px}
+.moods i{flex:1;background:var(--c3);border-radius:4px 4px 0 0;min-height:3px}
+.hb{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:14px}.hb span:first-child{width:46%}.hb .bar{flex:1}
+.banner{background:var(--accs);border-radius:12px;padding:12px;margin:12px 0}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.fgrid label{margin-top:4px;font-size:13px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+nav button{flex:1;border:0;background:none;padding:10px 2px;font-size:13px;color:var(--mute);min-height:56px}
+nav button.on{color:var(--acc);font-weight:700}
+nav button span{display:block;font-size:20px}
+@media(min-width:640px){nav{left:50%;transform:translateX(-50%);width:640px}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<nav id="nav"></nav>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+/* 1) Collez ici la configuration de votre projet Firebase (voir GUIDE.md) */
+const firebaseConfig={apiKey:"AIzaSyBwIIKhgc5MSrMxYMKbBxNhRfGq5EMU2tk",authDomain:"reconstruction-90.firebaseapp.com",projectId:"reconstruction-90",storageBucket:"reconstruction-90.firebasestorage.app",messagingSenderId:"767191696598",appId:"1:767191696598:web:51bd789d8441a3ac8a3577"};
+const H=[["Respiration ou méditation, 10 min","Mental"],["Coucher avant 23 h 30","Mental"],["Marche ou sport, 20 min","Corps"],["Un échange vrai avec un proche","Relations"],["Aucune publication impulsive","Discrétion"],["Dépenses du jour notées","Finances"],["Journal du soir","Mental"]];
+const DOM=["Mental","Relations","Discrétion","Finances"];
+const TOP=["Revenir à soi","Observer sans se juger","Retrouver un rythme","Bouger pour se sentir mieux","Nommer ses émotions","Choisir une priorité","Faire le premier bilan","Faire le point sur ses forces","Clarifier ses dépenses","Protéger son attention","Ranger un espace","Recontacter une personne sûre","Repérer une pensée répétitive","Prendre une vraie pause","Écrire ses valeurs","Définir une limite","Faire une démarche professionnelle","Lister ses compétences","Reprendre un contact utile","Planifier la semaine","Bilan et ajustement","Réduire une source de stress","Identifier ses déclencheurs","Pratiquer la réponse différée","Faire une activité agréable","Évaluer son cercle relationnel","Mettre à jour son budget","Bilan et ajustement","Choisir une priorité financière","Faire un petit pas commercial","Revoir ses habitudes","Faire le point sur le mois","Célébrer un progrès discret","Préparer le mois suivant","Bilan et ajustement"];
+const POOL=["Prendre soin de mon énergie","Clarifier un fait et une interprétation","Entretenir un lien fiable","Faire une action professionnelle utile","Réviser mes dépenses","Pratiquer une limite saine","Faire un bilan sans me juger","Préparer le lendemain","Apprendre quelque chose d’utile","Réduire une distraction","Reconnaître un progrès","Organiser une tâche reportée","Prendre l’air et bouger","Faire le point sur mes objectifs"];
+const topic=n=>n<=TOP.length?TOP[n-1]:POOL[(n-TOP.length-1)%POOL.length];
+const QUOTES=["Je n’ai pas besoin de tout régler aujourd’hui. Je dois seulement faire le prochain pas utile.","Ma valeur ne dépend pas de l’attention que les autres me donnent.","La discrétion protège ma paix ; elle ne m’oblige pas à m’isoler.","Je construis ma stabilité par des actions simples et répétées."];
+const RQ=["Ai-je pris soin de mon équilibre mental et physique ?","Ai-je évité de réagir sous le coup de la colère ?","Ai-je entretenu un lien sain sans m’isoler ?","Ai-je respecté ma discrétion sur les réseaux ?","Ai-je accompli une action financière ou professionnelle concrète ?"];
+const RULES_E=["Je distingue les faits de mes interprétations avant de conclure sur les intentions de quelqu’un.","Je n’utilise pas les publications pour envoyer des messages indirects ou provoquer des regrets.","Je ne prête ni ne dépense d’argent essentiel pour garder l’affection ou l’approbation d’une personne.","Je reste discret en ligne sans couper les liens humains fiables.","Je privilégie la régularité plutôt que la perfection."];
+const RULES_F=["Je protège d’abord les dépenses essentielles et une réserve adaptée à ma situation.","Je vérifie les fournisseurs, les biens, les commissions et les justificatifs avant d’engager de l’argent.","Je teste petit avant d’investir davantage, surtout dans une activité gérée à distance.","Je sépare l’argent personnel et l’argent de l’activité dans mes notes."];
+const W=[
+["Faire le point","Stabiliser",["Écrire ce qui s’est passé et ce que je veux dans 90 jours","Choisir 3 personnes de confiance et leur écrire","Lister tous mes comptes et passer les profils en privé","Lister revenus, dettes et dépenses fixes"]],
+["Installer la routine","Stabiliser",["Fixer une routine matin et soir, écrite","Dire à un proche de quoi j’ai besoin","Couper les notifications des réseaux","Ouvrir un budget minimal : essentiel / confort"]],
+["Alléger le bruit","Stabiliser",["Repérer mes 3 déclencheurs d’angoisse","Mettre en pause les relations qui drainent","Trier abonnements et contacts sur les réseaux","Supprimer 2 dépenses non essentielles"]],
+["Premier bilan","Stabiliser",["Relire mon carnet et noter 3 progrès","Remercier une personne qui m’a soutenu","Vérifier confidentialité et anciennes publications","Fixer un montant d’épargne de sécurité"]],
+["Comprendre mes schémas","Reconstruire",["Identifier un schéma qui se répète","Dire non une fois, calmement","Définir ce que je partage ou non en ligne","Rassembler les papiers administratifs"]],
+["Réparer ou clore","Reconstruire",["Écrire une lettre que je n’enverrai pas","Avoir une conversation difficile, ou y renoncer en conscience","Appliquer la règle des 24 h avant de répondre en ligne","Établir un plan de remboursement des dettes"]],
+["Reprendre le contrôle","Reconstruire",["Garder une activité qui me fait du bien chaque jour","Planifier 2 moments sociaux simples","Renforcer mots de passe et double authentification","Automatiser un virement d’épargne"]],
+["Se rendre solide","Reconstruire",["Lister mes forces et mes valeurs","Poser une limite claire avec quelqu’un","Choisir ma vitrine publique : professionnelle seulement ?","Trouver une source de revenu ou une économie de plus"]],
+["Bilan mi-parcours","Reconstruire",["Comparer ma situation avec la semaine 1","Remercier ou renouer avec une personne clé","Auditer ce qu’on trouve sur moi en ligne","Réviser mon budget avec les vrais chiffres"]],
+["Projeter","Ancrer",["Écrire ma vision à un an","Proposer une sortie ou un projet à un proche","Écrire mes règles durables pour les réseaux","Fixer 3 objectifs financiers à 12 mois"]],
+["Rayonner avec discernement","Ancrer",["Relever un petit défi qui me fait peur","Trouver un mentor ou un groupe","Publier seulement ce qui sert mon projet","Constituer ou renforcer le fonds d’urgence"]],
+["Sécuriser","Ancrer",["Préparer un plan pour les mauvais jours","Dire à mes proches ce qui m’a aidé","Faire un dernier nettoyage numérique","Vérifier que tout est automatisé et lisible"]],
+["Bilan final et suite","Ancrer",["Relire les 90 jours et m’écrire une lettre","Fêter avec les personnes qui ont compté","Choisir les règles de discrétion à garder","Définir le plan financier des 90 jours suivants"]]
+];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pad=n=>String(n).padStart(2,"0");
+const iso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const fresh=()=>({start:iso(new Date()),days:{},weeks:{},acts:{},money:{},notes:{}});
+let S=fresh(),ACC=null,AMODE="in",AERR="";
+let UID=null,timer=null,AOK="";
+function save(){if(!UID)return;try{localStorage.setItem("r90:"+UID,JSON.stringify(S))}catch(e){}clearTimeout(timer);timer=setTimeout(()=>setDoc(doc(db,"users",UID),{data:JSON.stringify(S),updated:Date.now()}).catch(()=>{}),800)}
+const dOf=n=>{const d=new Date(S.start+"T12:00:00");d.setDate(d.getDate()+n-1);return d};
+const key=n=>iso(dOf(n));
+const todayN=()=>Math.round((new Date(iso(new Date())+"T12:00:00")-new Date(S.start+"T12:00:00"))/864e5)+1;
+const clamp=n=>Math.max(1,Math.min(90,n));
+const wkOf=n=>Math.min(13,Math.floor((n-1)/7)+1);
+const get=n=>S.days[key(n)]||{};
+function setD(n,k,v){const q=key(n);(S.days[q]=S.days[q]||{})[k]=v;save()}
+const comp=n=>(get(n).h||[]).filter(Boolean).length;
+const wdays=w=>{const a=[];for(let n=(w-1)*7+1;n<=Math.min(w*7,90);n++)a.push(n);return a};
+const fmt=(d,o)=>d.toLocaleDateString("fr-FR",o);
+const spend=n=>parseFloat(get(n).sp)||0;
+const F=n=>Math.round(n).toLocaleString("fr-FR")+" FCFA";
+function calcFin(){const M=S.money||{},b=document.getElementById("fbal"),r=document.getElementById("ffree");if(b)b.textContent=F((+M.income||0)-(+M.expense||0));if(r)r.textContent=F((+M.cash||0)-(+M.reserve||0))}
+function exportTxt(){const L=["MA RECONSTRUCTION — 90 JOURS",""];for(let n=1;n<=90;n++){const g=get(n);if(g.in||g.win||g.les||g.gra||g.m)L.push("Jour "+n+" — "+topic(n)+"\nIntention : "+(g.in||"")+"\nHumeur : "+(g.m||"")+"/5\nVictoire : "+(g.win||"")+"\nÀ retenir : "+(g.les||"")+"\nReconnaissance : "+(g.gra||""),"")}const N=S.notes||{};L.push("CARNET PRIVÉ","Valeurs : "+(N.principles||""),"Limites : "+(N.boundaries||""),"Soutien : "+(N.support||""),"Vision à 6 mois : "+(N.future||""));const u=URL.createObjectURL(new Blob([L.join("\n")],{type:"text/plain;charset=utf-8"})),a=document.createElement("a");a.href=u;a.download="ma-reconstruction-carnet.txt";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+const U={tab:"day",n:clamp(todayN()),w:wkOf(clamp(todayN())),arm:false,msg:""};
+
+function acts(w){return W[w-1][2].map((t,i)=>{const k="w"+w+"-"+i,on=S.acts[k];return `<button class="chk ${on?"on":""}" data-a="act" data-k="${k}"><span class="box">✓</span><span><span class="t">${t}</span><br><span class="tag">${DOM[i]}</span></span></button>`}).join("")}
+
+function day(){const n=U.n,w=wkOf(n),g=get(n),h=g.h||[],t=todayN();
+const sun=t>=1&&t<=90&&dOf(t).getDay()===0;
+return `<div class="row sp"><button class="arrow" data-a="dn" data-v="-1" aria-label="Jour précédent">‹</button>
+<div style="text-align:center"><h1>Jour ${n} sur 90</h1><div class="mute">${fmt(dOf(n),{weekday:"long",day:"numeric",month:"long"})}${n===t?" · aujourd’hui":""}</div></div>
+<button class="arrow" data-a="dn" data-v="1" aria-label="Jour suivant">›</button></div>
+<div class="mute" style="text-align:center;margin-top:4px">Semaine ${w} : ${W[w-1][0]} (${W[w-1][1]})</div>
+<div style="text-align:center;margin-top:6px"><b>Thème du jour : ${topic(n)}</b></div>
+${sun&&n===t?`<div class="banner"><b>C’est dimanche.</b> Prenez 10 minutes pour votre bilan de la semaine.<br><button class="btn" style="margin-top:8px" data-a="gosun" data-v="${w}">Faire mon bilan</button></div>`:""}
+<div class="card"><h3>Mon intention du jour</h3><input type="text" data-f="in" placeholder="Aujourd’hui, je veux surtout…" value="${esc(g.in)}"></div>
+<div class="card"><div class="row sp"><h3>Habitudes</h3><span class="mute">${comp(n)} sur ${H.length}</span></div>
+${H.map((x,i)=>`<button class="chk ${h[i]?"on":""}" data-a="hab" data-v="${i}"><span class="box">✓</span><span><span class="t">${x[0]}</span><br><span class="tag">${x[1]}</span></span></button>`).join("")}</div>
+<div class="card"><h3>Actions de la semaine</h3>${acts(w)}</div>
+<div class="card"><h3>Comment je me sens</h3>
+<label>Humeur (1 bas, 5 haut)</label><div class="scale">${[1,2,3,4,5].map(v=>`<button class="${g.m===v?"on":""}" data-a="m" data-v="${v}">${v}</button>`).join("")}</div>
+<label>Énergie</label><div class="scale">${[1,2,3,4,5].map(v=>`<button class="${g.e===v?"on":""}" data-a="e" data-v="${v}">${v}</button>`).join("")}</div>
+<label>Dépenses du jour (FCFA)</label><input type="number" inputmode="decimal" data-f="sp" placeholder="0" value="${esc(g.sp)}"></div>
+<div class="card"><h3>Carnet du soir</h3>
+<label>Une victoire, même petite</label><textarea data-f="win">${esc(g.win)}</textarea>
+<label>Ce que j’ai appris ou ce qui a été dur</label><textarea data-f="les">${esc(g.les)}</textarea>
+<label>Pour quoi je suis reconnaissant</label><textarea data-f="gra">${esc(g.gra)}</textarea></div>
+<div class="card" style="border-left:3px solid var(--warm);font-weight:600">${QUOTES[Math.floor((n-1)/7)%4]}</div>`}
+
+function board(){const t=Math.max(0,Math.min(90,todayN())),w=wkOf(Math.max(1,t||1));
+let st=0;for(let n=t;n>=1&&comp(n)>=5;n--)st++;
+const from=Math.max(1,t-6);let sum=0,c=0;for(let n=from;n<=t;n++){sum+=comp(n)/H.length;c++}
+const avg=c?Math.round(100*sum/c):0;
+const wsp=wdays(w).reduce((a,n)=>a+spend(n),0);let tsp=0;for(let n=1;n<=90;n++)tsp+=spend(n);
+const done=[0,1,2,3].filter(i=>S.acts["w"+w+"-"+i]).length;
+const cells=[...Array(90)].map((_,i)=>{const n=i+1,r=comp(n)/H.length,l=r>=.7?3:r>=.4?2:r>0?1:0;return `<button class="l${l} ${n===t?"now":""}" data-a="goday" data-v="${n}" aria-label="Jour ${n}"></button>`}).join("");
+const m=[];for(let n=Math.max(1,t-13);n<=t;n++)m.push(get(n).m||0);
+const rev=Object.keys(S.weeks).map(Number).filter(k=>S.weeks[k].sc).sort((a,b)=>b-a)[0];
+return `<h1>Tableau de pilotage</h1><div class="mute">${t<1?"Le projet commence le "+fmt(dOf(1),{day:"numeric",month:"long"}):"Jour "+t+" sur 90"}</div>
+<div class="card"><div class="bar"><i style="width:${Math.round(t/.9)}%"></i></div>
+<div class="grid">${cells}</div><div class="mute" style="margin-top:8px">Chaque case est un jour : plus elle est foncée, plus vous avez tenu vos habitudes. Touchez-en une pour l’ouvrir.</div></div>
+<div class="card stats"><div class="stat"><b>${st}</b><span class="mute">jours solides d’affilée</span></div><div class="stat"><b>${avg} %</b><span class="mute">habitudes sur 7 jours</span></div><div class="stat"><b>${done}/4</b><span class="mute">actions de la semaine</span></div></div>
+<div class="card"><h3>Habitudes sur 7 jours</h3>${H.map((x,i)=>{let k=0,d=0;for(let n=from;n<=t;n++){d++;if((get(n).h||[])[i])k++}const p=d?Math.round(100*k/d):0;return `<div class="hb"><span>${x[0]}</span><div class="bar"><i style="width:${p}%"></i></div><span class="mute">${p} %</span></div>`}).join("")}</div>
+<div class="card"><h3>Humeur des 14 derniers jours</h3><div class="moods">${m.map(v=>`<i style="height:${v*20}%;opacity:${v?1:.15}"></i>`).join("")||'<span class="mute">Pas encore de données.</span>'}</div></div>
+<div class="card"><h3>Mes finances</h3><div class="mute">En FCFA. Notez des chiffres réels, même approximatifs. Un revenu espéré n’est pas de l’argent encaissé.</div>
+${(()=>{const M=S.money||{},fi=(k,l)=>`<div><label>${l}</label><input type="number" inputmode="numeric" min="0" data-f="${k}" data-s="m" value="${esc(M[k])}"></div>`;return `<div class="fgrid" style="margin-top:6px">${fi("cash","Argent disponible")}${fi("income","Revenus encaissés ce mois")}${fi("expense","Dépenses ce mois")}${fi("reserve","Réserve à protéger")}</div>
+<div class="row sp" style="margin-top:12px"><span>Solde du mois</span><b id="fbal">${F((+M.income||0)-(+M.expense||0))}</b></div>
+<div class="row sp" style="margin-top:6px"><span>Au-dessus de la réserve</span><b id="ffree">${F((+M.cash||0)-(+M.reserve||0))}</b></div>
+<label>Mon objectif de revenu réaliste</label><input type="text" data-f="goal" data-s="m" placeholder="Ex. décrocher 1 mandat ou 3 clients" value="${esc(M.goal)}">
+<label>Ma prochaine action commerciale</label><textarea data-f="act" data-s="m" placeholder="Ex. contacter 3 anciens clients">${esc(M.act)}</textarea>`})()}
+<div class="row sp" style="margin-top:12px"><span class="mute">Dépenses notées cette semaine</span><b>${F(wsp)}</b></div><div class="row sp" style="margin-top:6px"><span class="mute">Depuis le début</span><b>${F(tsp)}</b></div></div>
+<div class="card"><h3>Dernier bilan du dimanche</h3>${rev?`<div class="mute">Semaine ${rev}</div>${DOM.map((d,i)=>`<div class="hb"><span>${d}</span><div class="bar"><i style="width:${(S.weeks[rev].sc[i]||0)*20}%"></i></div><span class="mute">${S.weeks[rev].sc[i]||0}/5</span></div>`).join("")}`:'<span class="mute">Aucun bilan pour l’instant. Le premier se fait le premier dimanche.</span>'}</div>`}
+
+function weeks(){return `<h1>Les 13 semaines</h1><div class="mute">Trois phases : stabiliser, reconstruire, ancrer.</div>`+W.map((x,i)=>{const w=i+1,ds=wdays(w);let s=0;ds.forEach(n=>s+=comp(n)/H.length);const p=Math.round(100*s/ds.length);
+return `<div class="card"><div class="row sp"><h3>Semaine ${w} : ${x[0]}</h3><span class="tag">${x[1]}</span></div><div class="mute">Jours ${ds[0]} à ${ds[ds.length-1]} · ${p} % des habitudes</div><div class="bar" style="margin:8px 0"><i style="width:${p}%"></i></div>${acts(w)}
+<div class="row" style="margin-top:8px"><button class="ghost" data-a="goday" data-v="${ds[0]}">Ouvrir le carnet</button><button class="ghost" data-a="gosun" data-v="${w}">Bilan</button></div></div>`}).join("")}
+
+function sunday(){const w=U.w,ds=wdays(w),r=S.weeks[w]||{},sc=r.sc||[0,0,0,0];
+let s=0,ms=0,mc=0,sp=0;ds.forEach(n=>{s+=comp(n)/H.length;const m=get(n).m;if(m){ms+=m;mc++}sp+=spend(n)});
+const f=(k,l)=>`<label>${l}</label><textarea data-f="${k}" data-s="w">${esc(r[k])}</textarea>`;
+return `<div class="row sp"><button class="arrow" data-a="wn" data-v="-1" aria-label="Semaine précédente">‹</button><div style="text-align:center"><h1>Bilan de la semaine ${w}</h1><div class="mute">${W[w-1][0]}</div></div><button class="arrow" data-a="wn" data-v="1" aria-label="Semaine suivante">›</button></div>
+<div class="card stats"><div class="stat"><b>${Math.round(100*s/ds.length)} %</b><span class="mute">habitudes</span></div><div class="stat"><b>${mc?(ms/mc).toFixed(1):"–"}</b><span class="mute">humeur moyenne</span></div><div class="stat"><b>${Math.round(sp).toLocaleString("fr-FR")}</b><span class="mute">FCFA dépensés</span></div></div>
+<div class="card"><h3>Mes notes par domaine</h3>${DOM.map((d,i)=>`<label>${d}</label><div class="scale">${[1,2,3,4,5].map(v=>`<button class="${sc[i]===v?"on":""}" data-a="sc" data-i="${i}" data-v="${v}">${v}</button>`).join("")}</div>`).join("")}</div>
+<div class="card"><h3>Questions du dimanche</h3>${RQ.map((q,i)=>`<button class="chk ${(r.q||[])[i]?"on":""}" data-a="rq" data-v="${i}"><span class="box">✓</span><span>${q}</span></button>`).join("")}</div>
+<div class="card"><h3>Mon regard sur la semaine</h3>${f("win","Ce qui a bien marché")}${f("hard","Ce qui a été difficile")}${f("adj","Ce que je change")}${f("nxt","Ma priorité de la semaine prochaine")}</div>`}
+
+function settings(){return `<h1>Plus</h1>
+<div class="card"><h3>Mon compte</h3><div class="mute">Connecté : ${esc(ACC)}</div><button class="ghost" style="margin-top:8px" data-a="out">Se déconnecter</button></div>
+<div class="card"><h3>Mon carnet privé</h3><div class="mute">Écrivez pour clarifier vos idées. Évitez d’y saisir des mots de passe ou des informations bancaires.</div>
+${[["principles","Les valeurs que je veux respecter","Ex. respect, honnêteté, autonomie…"],["boundaries","Les limites que je veux poser","Ce que j’accepte et ce que je n’accepte plus…"],["support","Les personnes et ressources qui peuvent me soutenir","Personnes de confiance, professionnels, contacts utiles…"],["future","Ma vision dans 6 mois","À quoi voudrais-je que ma vie ressemble ?"]].map(x=>`<label>${x[1]}</label><textarea data-f="${x[0]}" data-s="p" placeholder="${x[2]}">${esc((S.notes||{})[x[0]])}</textarea>`).join("")}</div>
+<div class="card"><h3>Règles qui protègent mon énergie</h3>${RULES_E.map(t=>`<div class="chk" style="min-height:0"><span>${t}</span></div>`).join("")}</div>
+<div class="card"><h3>Règles de prudence</h3>${RULES_F.map(t=>`<div class="chk" style="min-height:0"><span>${t}</span></div>`).join("")}</div>
+<div class="card"><h3>Date de départ</h3><input type="date" data-f="start" value="${S.start}"><div class="mute" style="margin-top:6px">Le jour 1 est le ${fmt(dOf(1),{day:"numeric",month:"long",year:"numeric"})}.</div></div>
+<div class="card"><h3>Sauvegarde</h3><div class="mute">Vos données sont enregistrées sur votre compte et synchronisées entre vos appareils. Vous pouvez aussi en garder une copie à part.</div>
+<div class="row" style="margin-top:10px"><button class="btn" data-a="copy">Copier la sauvegarde</button><button class="ghost" data-a="txt">Exporter un résumé texte</button></div>
+<label>Restaurer depuis une sauvegarde</label><textarea id="imp" placeholder="Collez ici le texte copié"></textarea>
+<button class="ghost" style="margin-top:8px" data-a="imp">Restaurer</button><div class="mute" style="margin-top:8px">${esc(U.msg)}</div></div>
+<div class="card"><h3>Repartir de zéro</h3><div class="mute">Efface tout le carnet de cet appareil.</div>
+<button class="ghost" style="margin-top:8px" data-a="reset">${U.arm?"Confirmer : tout effacer":"Effacer mes données"}</button></div>
+<div class="card mute">Astuce Android : dans Chrome, menu ⋮ puis « Ajouter à l’écran d’accueil » pour ouvrir ce carnet comme une application.</div>`}
+
+const TABS=[["day","📓","Carnet"],["board","📊","Pilotage"],["weeks","🗓️","Semaines"],["sun","🌤️","Dimanche"],["set","☰","Plus"]];
+function render(){if(!ACC){renderAuth();return}const y=window.scrollY;
+$("#app").innerHTML=({day,board,weeks,sunday:sunday,set:settings}[U.tab==="sun"?"sunday":U.tab]||day)();
+$("#nav").innerHTML=TABS.map(t=>`<button class="${U.tab===t[0]?"on":""}" data-a="tab" data-v="${t[0]}"><span>${t[1]}</span>${t[2]}</button>`).join("");
+window.scrollTo(0,y)}
+
+document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a,v=b.dataset.v,n=U.n;
+if(a==="amode"){AMODE=v;AERR="";renderAuth();return}
+if(a==="out"){logout();return}
+if(a==="forgot"){forgot();return}
+else if(a==="tab"){U.tab=v;U.arm=false;window.scrollTo(0,0)}
+else if(a==="dn"){U.n=clamp(n+ +v)}
+else if(a==="hab"){const h=(get(n).h||[]).slice();while(h.length<H.length)h.push(false);h[+v]=!h[+v];setD(n,"h",h)}
+else if(a==="m"||a==="e"){setD(n,a,get(n)[a]===+v?0:+v)}
+else if(a==="act"){S.acts[b.dataset.k]=!S.acts[b.dataset.k];save()}
+else if(a==="goday"){U.n=+v;U.tab="day";window.scrollTo(0,0)}
+else if(a==="gosun"){U.w=+v;U.tab="sun";window.scrollTo(0,0)}
+else if(a==="wn"){U.w=Math.max(1,Math.min(13,U.w+ +v))}
+else if(a==="rq"){const r=S.weeks[U.w]=S.weeks[U.w]||{};r.q=r.q||[];r.q[+v]=!r.q[+v];save()}
+else if(a==="txt"){exportTxt()}
+else if(a==="sc"){const r=S.weeks[U.w]=S.weeks[U.w]||{};r.sc=r.sc||[0,0,0,0];r.sc[+b.dataset.i]=+v;save()}
+else if(a==="copy"){const txt=JSON.stringify(S);try{navigator.clipboard.writeText(txt).then(()=>{U.msg="Sauvegarde copiée.";render()},()=>{U.msg="Copie impossible sur cet appareil.";render()})}catch(x){U.msg="Copie impossible sur cet appareil."}}
+else if(a==="imp"){try{const o=JSON.parse($("#imp").value);if(!o.start||!o.days)throw 0;S=o;save();U.msg="Sauvegarde restaurée."}catch(x){U.msg="Texte invalide : collez la sauvegarde complète."}}
+else if(a==="reset"){if(U.arm){S={start:iso(new Date()),days:{},weeks:{},acts:{}};save();U.arm=false;U.n=1;U.w=1}else U.arm=true}
+render()});
+
+document.addEventListener("input",e=>{const f=e.target.dataset&&e.target.dataset.f;if(!f)return;
+if(f==="start"){if(e.target.value){S.start=e.target.value;save()}return}
+if(e.target.dataset.s==="m"){S.money=S.money||{};S.money[f]=e.target.value;save();calcFin();return}
+if(e.target.dataset.s==="p"){S.notes=S.notes||{};S.notes[f]=e.target.value;save();return}
+if(e.target.dataset.s==="w"){const r=S.weeks[U.w]=S.weeks[U.w]||{};r[f]=e.target.value;save()}
+else setD(U.n,f,e.target.value)});
+document.addEventListener("change",e=>{if(e.target.dataset&&e.target.dataset.f==="start")render()});
+
+const ready=!firebaseConfig.apiKey.startsWith("COLLEZ");
+let auth=null,db=null;
+if(ready){const fa=initializeApp(firebaseConfig);auth=getAuth(fa);db=getFirestore(fa)}
+const ERR={"auth/invalid-email":"Adresse e-mail invalide.","auth/email-already-in-use":"Un compte existe déjà avec cet e-mail. Connectez-vous.","auth/weak-password":"Mot de passe trop faible : 8 caractères minimum.","auth/invalid-credential":"E-mail ou mot de passe incorrect.","auth/wrong-password":"E-mail ou mot de passe incorrect.","auth/user-not-found":"E-mail ou mot de passe incorrect.","auth/too-many-requests":"Trop de tentatives. Réessayez dans quelques minutes.","auth/network-request-failed":"Pas de connexion internet."};
+const errMsg=x=>ERR[x&&x.code]||"Une erreur est survenue. Réessayez.";
+async function login(u){UID=u.uid;ACC=u.email;let d=null;
+try{const s=await getDoc(doc(db,"users",UID));if(s.exists())d=JSON.parse(s.data().data)}catch(e){try{d=JSON.parse(localStorage.getItem("r90:"+UID))}catch(x){}}
+S=d&&d.start?d:fresh();U.tab="day";U.n=clamp(todayN());U.w=wkOf(U.n);U.arm=false;U.msg="";render()}
+function logout(){if(auth)signOut(auth)}
+async function forgot(){const em=($("#af")||{}).em;const v=em?em.value.trim():"";AOK="";
+if(!v){AERR="Saisissez d’abord votre adresse e-mail.";return renderAuth()}
+try{await sendPasswordResetEmail(auth,v);AERR="";AOK="E-mail envoyé : suivez le lien pour choisir un nouveau mot de passe."}catch(x){AERR=errMsg(x)}renderAuth()}
+function renderAuth(){const up=AMODE==="up";$("#nav").innerHTML="";
+$("#app").innerHTML=`<div style="padding-top:6vh"><h1>Ma reconstruction<br>90 jours</h1><div class="mute" style="margin:6px 0 14px">Un carnet privé pour avancer jour après jour.</div>
+${ready?"":`<div class="banner"><b>Configuration à faire.</b> Collez la configuration Firebase dans le fichier, comme expliqué dans le guide.</div>`}
+<div class="card"><div class="scale"><button class="${up?"":"on"}" data-a="amode" data-v="in">Se connecter</button><button class="${up?"on":""}" data-a="amode" data-v="up">Créer un compte</button></div>
+<form id="af" novalidate><label>Adresse e-mail</label><input type="email" name="em" autocomplete="email" inputmode="email" required>
+<label>Mot de passe${up?" (8 caractères minimum)":""}</label><input type="password" name="pw" autocomplete="${up?"new-password":"current-password"}" required>
+${up?`<label>Confirmer le mot de passe</label><input type="password" name="pw2" autocomplete="new-password" required>`:""}
+${AERR?`<div style="color:#c0392b;margin-top:10px">${esc(AERR)}</div>`:""}${AOK?`<div style="color:var(--acc);margin-top:10px">${esc(AOK)}</div>`:""}
+<button class="btn" style="width:100%;margin-top:14px;min-height:46px" type="submit">${up?"Créer mon compte":"Me connecter"}</button>
+${up?"":`<button class="ghost" type="button" style="width:100%;margin-top:10px;min-height:44px" data-a="forgot">Mot de passe oublié</button>`}</form></div>
+<div class="mute">Votre carnet est enregistré sur votre compte : retrouvez-le sur tous vos appareils en vous connectant.</div></div>`}
+document.addEventListener("submit",async e=>{e.preventDefault();AOK="";
+if(!ready){AERR="Firebase n’est pas encore configuré : voir le guide.";return renderAuth()}
+const f=e.target,em=f.em.value.trim(),pw=f.pw.value;
+try{if(AMODE==="up"){
+if(pw.length<8){AERR="Le mot de passe doit contenir au moins 8 caractères.";return renderAuth()}
+if(pw!==f.pw2.value){AERR="Les deux mots de passe sont différents.";return renderAuth()}
+await createUserWithEmailAndPassword(auth,em,pw)}else await signInWithEmailAndPassword(auth,em,pw);AERR=""
+}catch(x){AERR=errMsg(x);renderAuth()}});
+$("#app").innerHTML='<div class="mute" style="padding:25vh 0;text-align:center">Chargement…</div>';
+if(ready){onAuthStateChanged(auth,u=>{if(u)login(u);else{UID=null;ACC=null;S=fresh();renderAuth()}})}else renderAuth();
+</script>
+</body>
+</html>
