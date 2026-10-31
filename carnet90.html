@@ -300,5 +300,64 @@ $("#app").innerHTML='<div class="mute" style="padding:25vh 0;text-align:center">
 if(ready){onAuthStateChanged(auth,u=>{if(u)login(u);else{UID=null;ACC=null;S=fresh();renderAuth()}})}else renderAuth();
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
-</body>
+</body><!-- ========================================== -->
+<!-- MODULE D'ALARME PERSONNALISÉE -->
+<!-- ========================================== -->
+<div style="background: #1e293b; color: #f8fafc; padding: 15px; border-radius: 12px; margin: 15px 0; font-family: sans-serif; text-align: center;">
+  <h3 style="margin-top: 0; font-size: 15px; color: #38bdf8;">⏰ Mon Alarme Quotidienne</h3>
+  <input type="time" id="customAlarmTime" style="padding: 8px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 16px; margin-bottom: 8px;">
+  <br>
+  <button onclick="saveCustomAlarm()" style="background: #10b981; color: white; border: none; padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer;">Enregistrer l'alarme</button>
+  <p id="alarmStatus" style="font-size: 11px; margin-top: 8px; color: #cbd5e1; font-style: italic;"></p>
+</div>
+
+<script>
+  if ("Notification" in window && Notification.permission !== "granted") {
+    Notification.requestPermission();
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTime = localStorage.getItem('userCustomAlarm');
+    if (savedTime) {
+      document.getElementById('customAlarmTime').value = savedTime;
+      document.getElementById('alarmStatus').innerText = "✅ Alarme active pour : " + savedTime;
+    } else {
+      document.getElementById('alarmStatus').innerText = "⚠️ Aucune alarme configurée.";
+    }
+  });
+
+  function saveCustomAlarm() {
+    const timeInput = document.getElementById('customAlarmTime').value;
+    if (!timeInput) {
+      alert("Veuillez sélectionner une heure valide.");
+      return;
+    }
+    localStorage.setItem('userCustomAlarm', timeInput);
+    document.getElementById('alarmStatus').innerText = "✅ Alarme active pour : " + timeInput;
+    alert("Alarme enregistrée pour " + timeInput + " !");
+  }
+
+  setInterval(() => {
+    const savedTime = localStorage.getItem('userCustomAlarm');
+    if (!savedTime) return;
+
+    const maintenant = new Date();
+    const heures = String(maintenant.getHours()).padStart(2, '0');
+    const minutes = String(maintenant.getMinutes()).padStart(2, '0');
+    const heureActuelle = `${heures}:${minutes}`;
+
+    if (heureActuelle === savedTime) {
+      const derniereNotif = localStorage.getItem('lastTriggeredMinute');
+      if (derniereNotif !== heureActuelle) {
+        if ("Notification" in window && Notification.permission === "granted") {
+          new Notification("90jrd de reconstruction ⏰", {
+            body: "C'est l'heure de ton rappel personnalisé (" + savedTime + ") !"
+          });
+        }
+        localStorage.setItem('lastTriggeredMinute', heureActuelle);
+      }
+    }
+  }, 30000);
+</script>
+  
 </html>
